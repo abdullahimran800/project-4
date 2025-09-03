@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Age Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Age<span>Calc.</span></div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links" id="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Calculator</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- Calculator Box -->
+  <main>
+    <div class="app-container fade-in">
+      <h1>Age Calculator</h1>
+      <p>Enter your date of birth below to calculate your exact age:</p>
+
+      <div class="calculator-box">
+        <input type="date" id="dob">
+        <button onclick="calculateAge()">Calculate</button>
+        <p id="result"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AgeCalcAbdullah. All rights reserved.</p>
+  </footer>
+
+  <script>
+    
+
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("menu");
+
+hamburger.addEventListener("click", () => {
+  menu.classList.toggle("show");
+  hamburger.classList.toggle("active");
+});
+
+
+function calculateAge() {
+  const dob = document.getElementById("dob").value;
+  const result = document.getElementById("result");
+
+  if (!dob) {
+    result.innerText = "⚠️ Please enter your date of birth.";
+    return;
+  }
+
+  const birthDate = new Date(dob);
+  const today = new Date();
+
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  if (days < 0) {
+    months--;
+    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+  }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  result.innerText = `🎉 You are ${years} years, ${months} months, and ${days} days old.`;
+}
+
+  </script>
+</body>
+</html>
